@@ -1,28 +1,24 @@
-# Diet Recommendation Program
+# 식단 추천 프로그램 (Diet Recommendation Program)
 
-## Overview
+## 개요
+이 프로젝트는 사용자의 신체 정보와 활동량을 바탕으로 맞춤형 일일 식단을 추천해주는 웹 애플리케이션입니다. 모든 인터페이스가 한국어로 제공되며, 눈의 피로를 줄여주는 다크 모드 기능을 지원합니다.
 
-This project is a web-based diet recommendation program. Users can input their personal information (age, weight, height, activity level) and dietary preferences to receive a customized diet plan.
+## 프로젝트 개요
 
-## Project Outline
+### 디자인 및 스타일
+*   **레이아웃:** 반응형 웹 디자인을 적용하여 모바일과 데스크톱 어디서든 편리하게 이용 가능합니다.
+*   **테마:** CSS 변수를 활용한 라이트 모드 및 다크 모드를 지원하며, 사용자의 선택이 브라우저에 저장됩니다.
+*   **컴포넌트:** Web Components를 사용하여 폼 인터페이스를 캡슐화하고 재사용성을 높였습니다.
 
-### Style and Design
+### 주요 기능
+*   **한국어 지원:** 나이, 몸무게, 키, 활동량 등 모든 입력을 한국어로 처리합니다.
+*   **다크 모드:** 헤더의 버튼을 통해 테마를 자유롭게 전환할 수 있습니다.
+*   **칼로리 계산:** Mifflin-St Jeor 방정식을 사용하여 정밀한 기초대사량(BMR) 및 권장 칼로리를 계산합니다.
+*   **식단 생성:** 아침, 점심, 저녁, 간식의 비중(25:35:25:15)에 맞춘 추천 식단을 제공합니다.
+*   **인쇄 및 저장:** 생성된 식단을 PDF로 저장하거나 인쇄할 수 있는 기능을 제공합니다.
 
-*   **Layout:** Clean, modern, and responsive layout that works on both desktop and mobile devices.
-*   **Colors:** A calming and encouraging color palette will be used.
-*   **Typography:** Clear and readable fonts will be chosen.
-*   **Visuals:** Placeholder images for food items will be used.
-
-### Features
-
-*   **User Input Form:** A form for users to enter their information.
-*   **Calorie Calculation:** Calculates the user's daily calorie needs based on their input.
-*   **Diet Plan Generation:** Generates a sample diet plan with breakfast, lunch, dinner, and snacks.
-*   **Print/Save:** A button to print or save the diet plan.
-
-## Current Plan
-
-*   Create the basic HTML structure for the input form and the diet plan display.
-*   Style the page with CSS for a visually appealing layout.
-*   Implement the JavaScript logic for calorie calculation and diet plan generation.
-*   Use a Web Component for the input form.
+## 현재 상태
+1.  **한국어 번역 완료:** HTML 및 JavaScript 내의 모든 텍스트를 한국어로 변경했습니다.
+2.  **다크 모드 구현 완료:** `localStorage`를 연동하여 테마 유지 기능을 추가했습니다.
+3.  **UI 개선:** 카드 형태의 레이아웃과 부드러운 스크롤 효과를 적용했습니다.
+4.  **배포 준비:** GitHub 및 Firebase를 통한 배포를 지원합니다.

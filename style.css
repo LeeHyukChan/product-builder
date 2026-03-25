@@ -1,36 +1,85 @@
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --card-bg-color: #fff;
+    --header-bg: #333;
+    --header-text: #fff;
+    --accent-color: #007bff;
+    --input-border: #ccc;
+}
+
+[data-theme='dark'] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg-color: #2d2d2d;
+    --header-bg: #111;
+    --header-text: #fff;
+    --accent-color: #4da3ff;
+    --input-border: #444;
+}
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 2rem;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 main {
-    padding: 1rem;
+    padding: 2rem 1rem;
     max-width: 800px;
     margin: 0 auto;
 }
 
 #diet-plan {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
+    background: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-top: 1.5rem;
+    transition: background-color 0.3s;
 }
 
 user-input-form {
     display: block;
-    margin-bottom: 1rem;
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
+    background: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: background-color 0.3s;
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--header-text);
+    color: var(--header-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+#theme-toggle:hover {
+    background: var(--header-text);
+    color: var(--header-bg);
 }
