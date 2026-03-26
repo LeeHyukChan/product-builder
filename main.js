@@ -1,32 +1,43 @@
-// Theme Management
-const themeToggle = document.querySelector('#theme-toggle');
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Theme Management
+    const themeToggle = document.querySelector('#theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
 
-if (currentTheme === 'dark') {
-    document.body.setAttribute('data-theme', 'dark');
-    themeToggle.textContent = '라이트 모드';
-}
-
-themeToggle.addEventListener('click', () => {
-    let theme = 'light';
-    if (!document.body.hasAttribute('data-theme')) {
+    if (currentTheme === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
-        themeToggle.textContent = '라이트 모드';
-        theme = 'dark';
-    } else {
-        document.body.removeAttribute('data-theme');
-        themeToggle.textContent = '다크 모드';
+        if (themeToggle) themeToggle.textContent = '라이트 모드';
     }
-    localStorage.setItem('theme', theme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            let theme = 'light';
+            if (!document.body.hasAttribute('data-theme')) {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '라이트 모드';
+                theme = 'dark';
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeToggle.textContent = '다크 모드';
+                theme = 'light';
+            }
+            localStorage.setItem('theme', theme);
+        });
+    }
 });
 
 class UserInputForm extends HTMLElement {
     constructor() {
         super();
-        const shadow = this.attachShadow({ mode: 'open' });
+        this.attachShadow({ mode: 'open' });
+    }
 
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = `
+    connectedCallback() {
+        this.render();
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
             <style>
                 form {
                     display: flex;
@@ -85,14 +96,12 @@ class UserInputForm extends HTMLElement {
             </form>
         `;
 
-        shadow.appendChild(wrapper);
-
-        shadow.querySelector('#user-info-form').addEventListener('submit', (e) => {
+        this.shadowRoot.querySelector('#user-info-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const age = shadow.querySelector('#age').value;
-            const weight = shadow.querySelector('#weight').value;
-            const height = shadow.querySelector('#height').value;
-            const activityLevel = shadow.querySelector('#activity-level').value;
+            const age = this.shadowRoot.querySelector('#age').value;
+            const weight = this.shadowRoot.querySelector('#weight').value;
+            const height = this.shadowRoot.querySelector('#height').value;
+            const activityLevel = this.shadowRoot.querySelector('#activity-level').value;
 
             const calories = this.calculateCalories(age, weight, height, activityLevel);
             this.generateDietPlan(calories);
@@ -100,13 +109,14 @@ class UserInputForm extends HTMLElement {
     }
 
     calculateCalories(age, weight, height, activityLevel) {
-        // Mifflin-St Jeor Equation
         const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
         return bmr * activityLevel;
     }
 
     generateDietPlan(calories) {
         const dietPlanElement = document.querySelector('#diet-plan');
+        if (!dietPlanElement) return;
+        
         dietPlanElement.innerHTML = `
             <h2 style="margin-top: 0;">당신의 하루 맞춤 식단</h2>
             <p style="font-size: 1.2rem; margin-bottom: 2rem;">
@@ -152,9 +162,115 @@ class UserInputForm extends HTMLElement {
             </button>
         `;
         
-        // Scroll to the result
         dietPlanElement.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
+class PartnershipForm extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        this.render();
+    }
+
+    render() {
+        this.shadowRoot.innerHTML = `
+            <style>
+                :host {
+                    display: block;
+                    background: var(--card-bg-color);
+                    color: var(--text-color);
+                }
+                h2 {
+                    margin-top: 0;
+                    color: var(--accent-color);
+                    font-size: 1.8rem;
+                    margin-bottom: 1rem;
+                }
+                p {
+                    margin-bottom: 2rem;
+                    opacity: 0.9;
+                }
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.2rem;
+                }
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                label {
+                    font-weight: bold;
+                    font-size: 0.95rem;
+                }
+                input, textarea {
+                    padding: 0.9rem;
+                    border-radius: 8px;
+                    border: 1px solid var(--input-border);
+                    background-color: var(--bg-color);
+                    color: var(--text-color);
+                    font-size: 1rem;
+                    font-family: inherit;
+                    transition: border-color 0.3s, box-shadow 0.3s;
+                }
+                input:focus, textarea:focus {
+                    outline: none;
+                    border-color: var(--accent-color);
+                    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+                }
+                textarea {
+                    resize: vertical;
+                    min-height: 120px;
+                }
+                button {
+                    padding: 1.2rem;
+                    border-radius: 8px;
+                    border: none;
+                    background-color: var(--accent-color);
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                    margin-top: 1rem;
+                    transition: transform 0.2s, opacity 0.3s;
+                }
+                button:hover {
+                    opacity: 0.9;
+                    transform: translateY(-2px);
+                }
+                button:active {
+                    transform: translateY(0);
+                }
+            </style>
+            <h2>🤝 서비스 제휴 문의</h2>
+            <p>함께 성장할 파트너를 찾고 있습니다. 궁금하신 점이나 제안 사항을 남겨주세요.</p>
+            <form action="https://formspree.io/f/xjgpvzog" method="POST">
+                <div class="form-group">
+                    <label for="name">성함 또는 기업명</label>
+                    <input type="text" id="name" name="name" required placeholder="예: 홍길동 (주식회사 식단)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">회신 받을 이메일</label>
+                    <input type="email" id="email" name="_replyto" required placeholder="contact@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">문의 및 제안 내용</label>
+                    <textarea id="message" name="message" required placeholder="제휴하고 싶은 내용이나 궁금한 점을 상세히 적어주세요."></textarea>
+                </div>
+                
+                <button type="submit">제휴 제안 보내기</button>
+            </form>
+        `;
+    }
+}
+
+// Register components
 customElements.define('user-input-form', UserInputForm);
+customElements.define('partnership-form', PartnershipForm);

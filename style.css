@@ -59,13 +59,18 @@ main {
     transition: background-color 0.3s;
 }
 
-user-input-form {
+user-input-form, partnership-form {
     display: block;
     background: var(--card-bg-color);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     transition: background-color 0.3s;
+    margin-bottom: 2rem;
+}
+
+partnership-form {
+    border: 2px solid var(--accent-color);
 }
 
 #theme-toggle {
