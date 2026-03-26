@@ -135,7 +135,7 @@ class UserInputForm extends HTMLElement {
                 <section>
                     <h3 style="color: var(--accent-color);">🥗 점심 (35%)</h3>
                     <ul style="padding-left: 1.2rem;">
-                        <li>구운 닭가슴살 샐러드와 다양한 채소</li>
+                        <li>구운 닭가슴살  salad와 다양한 채소</li>
                         <li>올리브 오일 드레싱과 현미밥 반 공기</li>
                     </ul>
                 </section>
@@ -271,6 +271,49 @@ class PartnershipForm extends HTMLElement {
     }
 }
 
+class DisqusComments extends HTMLElement {
+    constructor() {
+        super();
+        // Note: Disqus does not work well inside Shadow DOM due to how its scripts access the document.
+        // We will use a regular DOM approach for the container but style it.
+    }
+
+    connectedCallback() {
+        this.render();
+        this.loadDisqus();
+    }
+
+    render() {
+        this.innerHTML = `
+            <style>
+                disqus-comments {
+                    display: block;
+                    background: var(--card-bg-color);
+                    padding: 2rem;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                    margin-top: 2rem;
+                    transition: background-color 0.3s;
+                }
+                #disqus_thread {
+                    width: 100%;
+                }
+            </style>
+            <h2 style="color: var(--accent-color); margin-top: 0; margin-bottom: 1.5rem;">💬 댓글</h2>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        `;
+    }
+
+    loadDisqus() {
+        const d = document, s = d.createElement('script');
+        s.src = 'https://productbuilder-bjcdbvc0zk.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    }
+}
+
 // Register components
 customElements.define('user-input-form', UserInputForm);
 customElements.define('partnership-form', PartnershipForm);
+customElements.define('disqus-comments', DisqusComments);
