@@ -1,25 +1,28 @@
 :root {
-    --bg-color: #f4f4f4;
-    --text-color: #333;
-    --card-bg-color: #fff;
-    --header-bg: #333;
-    --header-text: #fff;
-    --accent-color: #007bff;
-    --input-border: #ccc;
+    --bg-color: #f8f9fa;
+    --text-color: #2d3436;
+    --card-bg-color: #ffffff;
+    --header-bg: #2d3436;
+    --header-text: #ffffff;
+    --accent-color: #6c5ce7;
+    --input-border: #dfe6e9;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --danger-color: #ff7675;
 }
 
 [data-theme='dark'] {
-    --bg-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --card-bg-color: #2d2d2d;
-    --header-bg: #111;
-    --header-text: #fff;
-    --accent-color: #4da3ff;
-    --input-border: #444;
+    --bg-color: #0f172a;
+    --text-color: #f1f5f9;
+    --card-bg-color: #1e293b;
+    --header-bg: #020617;
+    --header-text: #f1f5f9;
+    --accent-color: #818cf8;
+    --input-border: #334155;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -31,42 +34,85 @@ body {
 header {
     background: var(--header-bg);
     color: var(--header-text);
-    padding: 1rem 2rem;
+    padding: 1.2rem 2rem;
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
 }
 
 header h1 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 main {
-    padding: 2rem 1rem;
-    max-width: 800px;
+    padding: 2.5rem 1rem;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-#diet-plan {
+.nav-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
     background: var(--card-bg-color);
-    padding: 2rem;
+    padding: 0.4rem;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    margin-top: 1.5rem;
-    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-user-input-form, partnership-form {
+.nav-tab {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-tab.active {
+    background: var(--accent-color);
+    color: white;
+}
+
+#content-area > * {
+    display: none;
+}
+
+#content-area > *.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#diet-plan, personal-color-analyzer, user-input-form, partnership-form, disqus-comments {
     display: block;
     background: var(--card-bg-color);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: background-color 0.3s;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s, transform 0.3s;
     margin-bottom: 2rem;
+    border: 1px solid var(--input-border);
+}
+
+personal-color-analyzer {
+    border-top: 4px solid var(--accent-color);
 }
 
 partnership-form {

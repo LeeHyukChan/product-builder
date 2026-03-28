@@ -8,15 +8,29 @@
 </head>
 <body>
     <header>
-        <h1>식단 추천 프로그램</h1>
+        <h1>맞춤형 케어 플랫폼</h1>
         <button id="theme-toggle">다크 모드</button>
     </header>
     <main>
-        <user-input-form></user-input-form>
-        <div id="diet-plan"></div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-target="diet-section">식단 추천</button>
+            <button class="nav-tab" data-target="color-section">퍼스널 컬러</button>
+        </div>
+
+        <div id="content-area">
+            <div id="diet-section" class="active">
+                <user-input-form></user-input-form>
+                <div id="diet-plan"></div>
+            </div>
+            
+            <div id="color-section">
+                <personal-color-analyzer></personal-color-analyzer>
+            </div>
+        </div>
+
         <partnership-form></partnership-form>
         <disqus-comments></disqus-comments>
     </main>
-    <script src="main.js?v=1.2" defer></script>
+    <script src="main.js?v=1.3" defer></script>
 </body>
 </html>
