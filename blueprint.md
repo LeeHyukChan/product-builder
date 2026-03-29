@@ -37,3 +37,7 @@
 ### 3단계: 통합 및 테스트
 *   기존 식단 추천 기능과 조화롭게 배치 (탭 메뉴 또는 섹션 구분).
 *   다양한 조명의 사진에 대한 분석 정확도 보정.
+
+### 4단계: 분석 및 추적 (Analytics & Tracking)
+*   Google Analytics (gtag.js) 연동.
+*   `index.html` 상단에 Google tag 스크립트 추가 (ID: G-G3ZXJM8B6Q).
