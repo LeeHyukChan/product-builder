@@ -39,5 +39,6 @@
 *   다양한 조명의 사진에 대한 분석 정확도 보정.
 
 ### 4단계: 분석 및 추적 (Analytics & Tracking)
-*   Google Analytics (gtag.js) 연동.
-*   `index.html` 상단에 Google tag 스크립트 추가 (ID: G-G3ZXJM8B6Q).
+*   Google Analytics (gtag.js) 연동 (ID: G-G3ZXJM8B6Q).
+*   Microsoft Clarity 연동 (ID: w38epfxg0z).
+*   `index.html` 상단에 분석 및 추적용 스크립트 삽입.
